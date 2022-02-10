@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "trading-app": "apps/trading-app",
+    "trading-app-e2e": "apps/trading-app-e2e"
+  }
+}
