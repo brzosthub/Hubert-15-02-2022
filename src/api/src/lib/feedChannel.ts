@@ -1,6 +1,6 @@
 import { FeedArgs, FeedChannelStatus, StreamingMessage } from './types';
 import Feed from './feed';
-import { getLogger } from '@trading/utils/log';
+import { getLogger } from '@trading/utils';
 import { FEED_CHANNEL_SUBSCRIBE_TIMEOUT } from './constants';
 
 const log = getLogger('FeedChannel');

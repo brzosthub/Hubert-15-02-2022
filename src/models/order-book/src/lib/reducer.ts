@@ -1,7 +1,7 @@
 import { createReducer, isDraft, original } from '@reduxjs/toolkit';
 import { create, update, snapshot, remove } from '@trading/models/feed';
 import { Levels, Product } from './types';
-import { getLogger } from '@trading/utils/log';
+import { getLogger } from '@trading/utils';
 import { ENDPOINT } from './config';
 
 const log = getLogger('orderBookReducer');

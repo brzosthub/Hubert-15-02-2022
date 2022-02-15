@@ -1,5 +1,5 @@
 import { ENDPOINT } from './config';
-import { config } from '@trading/utils/config';
+import { config } from '@trading/utils';
 import { triggerSubscribe, triggerUnsubscribe } from '@trading/models/feed';
 
 export const subscribe = (

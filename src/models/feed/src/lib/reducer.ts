@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { addOwner, create, remove, removeOwner, status } from './actions';
-import { getLogger } from '@trading/utils/log';
+import { getLogger } from '@trading/utils';
 import { FeedSlice } from './types';
 import { getEndpointHash } from '@trading/api';
 

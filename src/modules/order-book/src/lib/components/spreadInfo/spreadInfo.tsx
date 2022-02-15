@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { percentageFormatter, priceFormatter } from '../formatters';
 import styles from './spreadInfo.module.scss';
 import classNames from 'classnames';
-import { config } from '@trading/utils/config';
+import { config } from '@trading/utils';
 import { OrderBookState } from '@trading/models/order-book';
 
 type Props = {

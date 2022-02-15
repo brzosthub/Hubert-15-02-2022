@@ -25,7 +25,7 @@
             "@trading/modules/order-book": [
                 "src/modules/order-book/src/index.ts"
             ],
-            "@trading/utils/config": ["src/utils/config/src/index.ts"],
+            "@trading/utils": ["src/utils/src/index.ts"],
             "@trading/utils/log": ["src/utils/log/src/index.ts"]
         }
     },

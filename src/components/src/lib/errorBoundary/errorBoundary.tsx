@@ -1,5 +1,5 @@
 import React, { ErrorInfo } from 'react';
-import { getLogger } from '@trading/utils/log';
+import { getLogger } from '@trading/utils';
 import NoticeOverlay from '../noticeOverlay/noticeOverlay';
 
 type Props = {

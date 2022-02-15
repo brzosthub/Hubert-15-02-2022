@@ -10,7 +10,7 @@ import {
     FeedState,
 } from './types';
 import { getEndpointHash } from '@trading/api';
-import { getLogger } from '@trading/utils/log';
+import { getLogger } from '@trading/utils';
 import * as selectors from './selectors';
 import getApiFeed from './getApiFeed';
 import * as queries from './queries';

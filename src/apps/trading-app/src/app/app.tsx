@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import getStore from './store';
 import styles from './app.module.scss';
 import { Module, ErrorBoundary, Stats } from '@trading/components';
-import { config } from '@trading/utils/config';
+import { config } from '@trading/utils';
 
 type Props = {
     dataTestId?: string;

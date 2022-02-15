@@ -1,5 +1,5 @@
 import log, { getLogger, LogLevelDesc } from 'loglevel';
-import { config } from '@trading/utils/config';
+import config from '../lib/config';
 
 // TODO: Feature - switch to sth more sophisticated, add server side logs
 const originalFactory = log.methodFactory;

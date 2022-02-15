@@ -7,12 +7,12 @@ import {
     FeedArgs,
     FeedChannelStatus,
 } from './types';
-import { getLogger } from '@trading/utils/log';
+import { getLogger } from '@trading/utils';
 import FeedChannel from './feedChannel';
 import { getEndpointHash } from './utils';
 import { TimeoutId } from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 import Med from './med';
-import { config } from '@trading/utils/config';
+import { config } from '@trading/utils';
 
 const log = getLogger('feed');
 

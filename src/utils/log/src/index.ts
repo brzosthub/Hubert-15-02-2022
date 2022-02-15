@@ -1,2 +1,2 @@
-export type { LogLevelDesc } from './lib/logger';
-export { getLogger } from './lib/logger';
+export type { LogLevelDesc } from '../../src/lib/logger';
+export { getLogger } from '../../src/lib/logger';

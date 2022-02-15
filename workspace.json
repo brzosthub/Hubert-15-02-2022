@@ -8,7 +8,6 @@
         "models-feed": "src/models/feed",
         "models-order-book": "src/models/order-book",
         "modules-order-book": "src/modules/order-book",
-        "utils-config": "src/utils/config",
-        "utils-log": "src/utils/log"
+        "utils": "src/utils"
     }
 }

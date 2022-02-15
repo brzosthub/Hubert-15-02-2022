@@ -1,5 +1,7 @@
+import { LogLevelDesc } from './logger';
+
 export type Config = {
-    logLevel?: any;
+    logLevel?: LogLevelDesc;
     showStats?: boolean;
     showDouble?: boolean;
     showAll?: boolean;

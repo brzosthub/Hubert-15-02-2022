@@ -16,7 +16,7 @@ import { createGetBids, createGetAsks } from '../../selectors';
 import { getTotalOfTotals } from '../../queries';
 import SpreadInfo from '../spreadInfo/spreadInfo';
 import { Level, OrderBookState } from '@trading/models/order-book';
-import { config } from '@trading/utils/config';
+import { config } from '@trading/utils';
 import { getNumLevels } from '@trading/models/order-book';
 
 type Props = {
