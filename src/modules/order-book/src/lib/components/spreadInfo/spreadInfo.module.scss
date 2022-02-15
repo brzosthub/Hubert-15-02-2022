@@ -1,0 +1,9 @@
+@import './src/components/src/lib/theme/theme';
+
+.spreadInfo {
+    &_isVertical {
+        font-size: inherit;
+        line-height: $dataGrid-header-height;
+        height: $dataGrid-header-height;
+    }
+}

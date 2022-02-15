@@ -1,0 +1,6 @@
+@import '../theme/theme';
+
+:export {
+    rowHeight: $dataGrid-row-height;
+    headerHeight: $dataGrid-header-height;
+}

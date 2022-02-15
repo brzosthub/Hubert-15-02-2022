@@ -1,0 +1,19 @@
+@import '../theme/theme';
+
+.button {
+    border: none;
+    padding: $padding-medium;
+    border-radius: $padding-regular;
+    color: $primary-text-color;
+    background-color: $primary-color;
+
+    &:hover:not(:disabled) {
+        background-color: lighten($primary-color, 2%);
+        color: lighten($primary-text-color, 5%);
+    }
+
+    &:disabled {
+        pointer-events: none;
+        background-color: $secondary-text-color;
+    }
+}

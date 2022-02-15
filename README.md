@@ -1,94 +1,84 @@
-
-
 # Trading
 
-This project was generated using [Nx](https://nx.dev).
+Project was created to demonstrate how to structure and solve some basic problems related to creating trading platform.
+Initial version of OrderBook was created. With a little more effort it could be a good starter for such project.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+## Screenshoots
 
-🔎 **Smart, Fast and Extensible Build System**
+![Screenshot 2022-02-14 at 10 00 13](https://user-images.githubusercontent.com/2132309/153832394-88cc68e0-91e8-4b67-81f9-dacd9a223c0b.png)
+![Screenshot 2022-02-14 at 10 00 27](https://user-images.githubusercontent.com/2132309/153832403-04ecd702-6334-4e40-bc1e-e4203b3f75cb.png)
+![Screenshot 2022-02-14 at 10 00 52](https://user-images.githubusercontent.com/2132309/153832410-a8242933-c9e6-4098-933c-39ea13016c24.png)
 
-## Adding capabilities to your workspace
+## Libraries and tools
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+-   React
+-   Typescript
+-   Redux
+-   Yarn
+-   Nx
+-   Cypress
+-   Jest
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+## Available commands
 
-Below are our core plugins:
+`yarn start` - starting dev server
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+`yarn build` - production build
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+`yarn build:watch` - watch production build
 
-## Generate an application
+`yarn test` - run jest and cypress
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+`yarn coverage:generate` - generate coverage report
 
-> You can use any of the plugins above to generate applications as well.
+## What is covered
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+-   Order Book module, functional and running
+-   Components lib, created for better perf
+-   Css modules (BEM with camelcase)
+-   Functional project structure
+-   Modules separation - ground for micro frontend and dynamic module loading
+-   Feed subscription sharing through feed model
 
-## Generate a library
+## Testing
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+-   Latest Chrome
+-   Latest Safari
+-   Latest Opera
+-   Iphone Xs
+-   Samsung s10e
 
-> You can also use any of the plugins above to generate libraries as well.
+## Code coverage
 
-Libraries are shareable across libraries and applications. They can be imported from `@trading/mylib`.
+Code test coverage ic collected from both jest (unit) and cypress (integration) tests
 
-## Development server
+![Screenshot 2022-02-15 at 00 36 50](https://user-images.githubusercontent.com/2132309/153965304-8068ae67-6b6d-48ba-8005-57ada46e6f0e.png)
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+## Project structure
 
-## Code scaffolding
+Project structure is quite common. We have a api / module / models / components separation.
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+![Screenshot 2022-02-14 at 23 36 17](https://user-images.githubusercontent.com/2132309/153958945-e3051f81-7417-4a1d-9659-63e637d3cb95.png)
 
-## Build
+## Dependancy graph
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+![Screenshot 2022-02-14 at 23 34 54](https://user-images.githubusercontent.com/2132309/153959096-f3da1c8c-844f-4a43-b245-a6a071e08ef7.png)
 
-## Running unit tests
+## Accesing store
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+Store object is available through `window.getStore().getState()`
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+## Links
 
-## Running end-to-end tests
+You check the app here:
+https://hubert-trading.vercel.app/
 
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+To check how feed subscription sharing works you can open (requires more testing):
+https://hubert-trading.vercel.app/?showDouble=true
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+Be default we are trimmig results to numLevels if you want to see all:
+https://hubert-trading.vercel.app/?showAll=true
 
-## Understand your workspace
+## Final notes
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Coding took around 70h. Project was developed in progressive way. It was improved iteration by iteration. There are parts that are prod ready, and some that require couple more iterations (you need to stop at some point:)). There are todos marked in code to highlight next steps.

@@ -1,0 +1,75 @@
+{
+    "root": "src/apps/trading-app",
+    "sourceRoot": "src/apps/trading-app/src",
+    "projectType": "application",
+    "targets": {
+        "build": {
+            "executor": "@nrwl/web:webpack",
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "production",
+            "options": {
+                "compiler": "babel",
+                "outputPath": "dist/src/apps/trading-app",
+                "index": "src/apps/trading-app/src/index.html",
+                "baseHref": "/",
+                "main": "src/apps/trading-app/src/index.tsx",
+                "polyfills": "src/apps/trading-app/src/polyfills.ts",
+                "tsConfig": "src/apps/trading-app/tsconfig.app.json",
+                "assets": ["src/apps/trading-app/src/assets"],
+                "styles": [
+                    "src/apps/trading-app/src/index.scss",
+                    "node_modules/material-design-icons/iconfont/material-icons.css"
+                ],
+                "scripts": [],
+                "webpackConfig": "@nrwl/react/plugins/webpack"
+            },
+            "configurations": {
+                "production": {
+                    "fileReplacements": [
+                        {
+                            "replace": "src/apps/trading-app/src/environments/environment.ts",
+                            "with": "src/apps/trading-app/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "namedChunks": false,
+                    "extractLicenses": true,
+                    "vendorChunk": false
+                }
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/web:dev-server",
+            "options": {
+                "buildTarget": "apps-trading-app:build",
+                "hmr": true
+            },
+            "configurations": {
+                "production": {
+                    "buildTarget": "apps-trading-app:build:production",
+                    "hmr": false
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "src/apps/trading-app/**/*.{ts,tsx,js,jsx}"
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/src/apps/trading-app"],
+            "options": {
+                "jestConfig": "src/apps/trading-app/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

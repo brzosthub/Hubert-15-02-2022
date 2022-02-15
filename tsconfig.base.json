@@ -1,20 +1,34 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
-  },
-  "exclude": ["node_modules", "tmp"]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noPropertyAccessFromIndexSignature": false,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": ["es2017", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@trading/api": ["src/api/src/index.ts"],
+            "@trading/components": ["src/components/src/index.ts"],
+            "@trading/models/feed": ["src/models/feed/src/index.ts"],
+            "@trading/models/order-book": [
+                "src/models/order-book/src/index.ts"
+            ],
+            "@trading/modules/order-book": [
+                "src/modules/order-book/src/index.ts"
+            ],
+            "@trading/utils/config": ["src/utils/config/src/index.ts"],
+            "@trading/utils/log": ["src/utils/log/src/index.ts"]
+        }
+    },
+    "include": ["**/*.d.ts"],
+    "exclude": ["node_modules", "tmp"]
 }

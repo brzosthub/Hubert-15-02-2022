@@ -1,7 +1,14 @@
 {
-  "version": 2,
-  "projects": {
-    "trading-app": "apps/trading-app",
-    "trading-app-e2e": "apps/trading-app-e2e"
-  }
+    "version": 2,
+    "projects": {
+        "api": "src/api",
+        "apps-trading-app": "src/apps/trading-app",
+        "apps-trading-app-e2e": "src/apps/trading-app-e2e",
+        "components": "src/components",
+        "models-feed": "src/models/feed",
+        "models-order-book": "src/models/order-book",
+        "modules-order-book": "src/modules/order-book",
+        "utils-config": "src/utils/config",
+        "utils-log": "src/utils/log"
+    }
 }

@@ -1,0 +1,23 @@
+{
+    "root": "src/models/feed",
+    "sourceRoot": "src/models/feed/src",
+    "projectType": "library",
+    "tags": [],
+    "targets": {
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["src/models/feed/**/*.{ts,tsx,js,jsx}"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/src/models/feed"],
+            "options": {
+                "jestConfig": "src/models/feed/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    }
+}

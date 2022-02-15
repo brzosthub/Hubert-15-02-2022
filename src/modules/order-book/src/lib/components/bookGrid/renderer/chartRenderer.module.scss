@@ -1,0 +1,26 @@
+@import './src/components/src/lib/theme/theme';
+
+.chartRenderer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    will-change: transform;
+    transform-origin: left;
+
+    &_reversed {
+        transform-origin: right;
+    }
+
+    &_bid {
+        right: 0;
+        background-color: mix($bid-color, $app-background-color, 40%);
+    }
+
+    &_ask {
+        left: 0;
+        background-color: mix($ask-color, $app-background-color, 40%);
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "presets": [
+        [
+            "@nrwl/react/babel",
+            {
+                "runtime": "automatic",
+                "useBuiltIns": "usage"
+            }
+        ]
+    ],
+    "plugins": [],
+    "env": {
+        "e2e": {
+            "plugins": ["istanbul"]
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@import '../theme/theme';
+
+.sheet {
+    &__header {
+        border-bottom: $default-border;
+    }
+
+    &__footer {
+        padding: $padding-huge;
+    }
+}

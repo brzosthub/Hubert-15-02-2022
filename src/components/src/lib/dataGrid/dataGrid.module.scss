@@ -1,0 +1,79 @@
+@import '../theme/theme';
+
+.dataGrid {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    height: 100%;
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 0%;
+        overflow: hidden;
+
+        &_reverse {
+            flex-direction: column-reverse;
+        }
+
+        &_snapEnd {
+            justify-content: flex-end;
+        }
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        height: $dataGrid-row-height;
+
+        &_insetLeft {
+            padding-left: $padding-large;
+        }
+
+        &_insetRight {
+            padding-right: $padding-large;
+        }
+
+        &_reverse {
+            flex-direction: row-reverse;
+        }
+
+        &Cell {
+            flex: 1 1 0%;
+            overflow: hidden;
+            padding-left: $padding-small;
+            padding-right: $padding-small;
+            text-align: right;
+        }
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        border-top: $default-border;
+        border-bottom: $default-border;
+        height: $dataGrid-header-height;
+
+        &_insetLeft {
+            padding-left: $padding-large;
+        }
+
+        &_insetRight {
+            padding-right: $padding-large;
+        }
+
+        &_reverse {
+            flex-direction: row-reverse;
+        }
+
+        &Cell {
+            flex: 1 1 0%;
+            overflow: hidden;
+            padding-left: $padding-small;
+            padding-right: $padding-small;
+            text-transform: uppercase;
+            text-align: right;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@import './src/components/src/lib/theme/theme';
+
+.bookGrid {
+    &__column {
+        &_bid {
+            color: $bid-color;
+        }
+
+        &_ask {
+            color: $ask-color;
+        }
+
+        &_primary {
+            color: $primary-text-color;
+        }
+    }
+}

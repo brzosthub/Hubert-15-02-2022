@@ -1,0 +1,26 @@
+$font-size: 16px;
+$line-height: 1.5;
+
+$primary-color: #4144d8;
+$primary-text-color: #b8bbc1;
+$secondary-text-color: #4d5361;
+$app-background-color: #131823;
+
+$ask-color: #aa3033;
+$bid-color: #109165;
+
+$padding-small: 2px;
+$padding-regular: 5px;
+$padding-medium: 10px;
+$padding-huge: 20px;
+$padding-large: 40px;
+
+$default-border-width: 1px;
+$default-border: $default-border-width solid $secondary-text-color;
+
+$dataGrid-row-height: 25px;
+$dataGrid-header-height: $dataGrid-row-height + 2 * $default-border-width;
+
+$min-supported-height: 200px;
+$min-supported-portrait: 320px;
+$min-supported-width-landscape: 560px;

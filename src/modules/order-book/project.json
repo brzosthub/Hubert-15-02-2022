@@ -1,0 +1,25 @@
+{
+    "root": "src/modules/order-book",
+    "sourceRoot": "src/modules/order-book/src",
+    "projectType": "library",
+    "tags": [],
+    "targets": {
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "src/modules/order-book/**/*.{ts,tsx,js,jsx}"
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/src/modules/order-book"],
+            "options": {
+                "jestConfig": "src/modules/order-book/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    }
+}

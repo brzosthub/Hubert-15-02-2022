@@ -1,0 +1,23 @@
+{
+    "root": "src/utils/config",
+    "sourceRoot": "src/utils/config/src",
+    "projectType": "library",
+    "tags": [],
+    "targets": {
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["src/utils/config/**/*.{ts,tsx,js,jsx}"]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["coverage/src/utils/config"],
+            "options": {
+                "jestConfig": "src/utils/config/jest.config.js",
+                "passWithNoTests": true
+            }
+        }
+    }
+}

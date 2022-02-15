@@ -1,0 +1,49 @@
+@import '../theme/theme';
+
+.stack {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0%;
+    height: 100%;
+    position: relative;
+
+    &_crossCenter {
+        align-items: center;
+    }
+
+    &_center {
+        justify-content: center;
+    }
+
+    &_reversed {
+        flex-direction: row-reverse;
+    }
+    &_vertical {
+        flex-direction: column;
+    }
+
+    &_verticalReversed {
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+    }
+
+    &__item {
+        display: flex;
+        flex: 0 1 0%;
+        padding: $padding-regular;
+        position: relative;
+
+        &_grow {
+            flex: 1 1 0%;
+            overflow: hidden;
+        }
+
+        &_center {
+            justify-content: center;
+        }
+
+        &_fill {
+            padding: 0;
+        }
+    }
+}
