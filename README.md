@@ -62,7 +62,7 @@ Project structure is quite common. We have a api / module / models / components 
 
 ## Dependancy graph
 
-![Screenshot 2022-02-14 at 23 34 54](https://user-images.githubusercontent.com/2132309/153959096-f3da1c8c-844f-4a43-b245-a6a071e08ef7.png)
+![Screenshot 2022-02-16 at 10 40 41](https://user-images.githubusercontent.com/2132309/154238078-3224d381-47c6-4dd1-b8fc-14a29b645223.png)
 
 ## Accesing store
 
