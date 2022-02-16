@@ -6,7 +6,7 @@ import { FEED_CHANNEL_SUBSCRIBE_TIMEOUT } from './constants';
 const log = getLogger('FeedChannel');
 
 /**
- * TODO: Feature - we are accessing gere feed directly, switch to listeners
+ * TODO: Feature - we are accessing here feed directly, switch to listeners
  */
 class FeedChannel {
     id;
@@ -40,9 +40,11 @@ class FeedChannel {
         log.debug('subscribe called', this.toString());
 
         this.setStatus('subscribing');
+
         if (this.feed.status === 'connected') {
             this.waitForSubscribe();
         }
+
         this.feed.send({
             event: 'subscribe',
             feed: this.endpoint,

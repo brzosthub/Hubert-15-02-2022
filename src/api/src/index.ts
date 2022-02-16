@@ -1,7 +1,7 @@
 export type {
+    FeedData,
     FeedArgs,
     FeedChannelStatus,
-    FeedChannelListener,
     FeedStatus,
     FeedListener,
     StreamingMessage,

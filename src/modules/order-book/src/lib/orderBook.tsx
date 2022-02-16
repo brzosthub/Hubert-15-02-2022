@@ -63,11 +63,10 @@ function OrderBook({ componentId }: Props) {
     });
 
     const subscription = useSelector((state: FeedState) => getFeed(state));
-    const hasSubscription = Boolean(subscription);
 
     const { isLoading, isReconnecting, isSubscribed, isError, error } = useMemo(
         () => getInfo(subscription),
-        [subscription, componentId]
+        [subscription]
     );
 
     /**
@@ -105,7 +104,14 @@ function OrderBook({ componentId }: Props) {
             setShowReconnect(true);
             dispatch(unsubscribe(selectedProduct, componentId));
         }
-    }, [isActive, dispatch, selectedProduct, componentId, hasSubscription]);
+    }, [
+        isActive,
+        isReconnecting,
+        isError,
+        dispatch,
+        selectedProduct,
+        componentId,
+    ]);
 
     /**
      * Subscribe on product change

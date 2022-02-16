@@ -3,7 +3,7 @@ import { OrderBook } from '@trading/modules/order-book';
 import { Provider } from 'react-redux';
 import getStore from './store';
 import styles from './app.module.scss';
-import { Module, ErrorBoundary, Stats } from '@trading/components';
+import { Module, ErrorBoundary } from '@trading/components';
 import { config } from '@trading/utils';
 
 type Props = {
@@ -16,7 +16,6 @@ function App({ dataTestId }: Props) {
             <ErrorBoundary>
                 <Provider store={getStore()}>
                     <div data-test-id={dataTestId} className={styles.app}>
-                        {config.showStats && <Stats />}
                         <Module>
                             <OrderBook componentId="depthOfMarket1" />
                         </Module>

@@ -22,7 +22,7 @@ class MovAvg {
         this.sum += entry;
         this.count++;
         this.history.sort((a, b) => a - b);
-        this.avg = this.history[Math.floor(this.history.length / 2)]; //this.sum / this.count;
+        this.avg = this.history[Math.floor(this.history.length / 2)];
         return this.avg;
     }
 }

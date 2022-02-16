@@ -4,6 +4,8 @@ declare namespace Cypress {
         isWebSocketDisabled?: boolean;
     }
 
+    declare type ServerMessage = Record<string, any>;
+
     interface Chainable<Subject> {
         getByTestId(value: string): Chainable<Element>;
 
@@ -22,10 +24,10 @@ declare namespace Cypress {
 
         serverStop(): Chainable<null>;
 
-        serverSend(data: Array<Record<string, any> | string>): Chainable<null>;
+        serverSend(data: Array<ServerMessage | string>): Chainable<null>;
 
         waitForMessage(
-            data: Array<Record<string, any>> | Record<string, any>,
+            data: Array<ServerMessage> | ServerMessage,
             contains?: boolean
         ): Chainable<null>;
 

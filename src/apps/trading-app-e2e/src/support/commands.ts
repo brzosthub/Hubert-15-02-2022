@@ -10,31 +10,27 @@
 
 import { WebSocket as MockWebSocket, Server } from 'mock-websocket';
 import chaiSubset from 'chai-subset';
+import ServerMessage = Cypress.ServerMessage;
 
 chai.use(chaiSubset);
 
 let server: Server;
 let apiUrl: string;
-let client: MockWebSocket;
 let connectResolve: (client: MockWebSocket) => void;
-let connectReject: () => void;
 let connectPromise: Promise<MockWebSocket>;
-let messages: Array<Record<string, any>> = [];
+let messages: Array<ServerMessage> = [];
 
 function setupServer() {
     server = new Server(apiUrl, { mockGlobal: false });
-    connectPromise = new Promise<MockWebSocket>((resolve, reject) => {
+    connectPromise = new Promise<MockWebSocket>((resolve) => {
         connectResolve = resolve;
-        connectReject = reject;
     });
 
     server.on('connection', (socket) => {
-        client = socket;
         connectResolve(socket);
     });
 
-    server.on('message', (socket: MockWebSocket, data: any) => {
-        const message = data.toString();
+    server.on('message', (socket: MockWebSocket, message: string) => {
         const parsed = JSON.parse(message);
         messages.push(parsed);
         Cypress.log({
@@ -85,20 +81,17 @@ Cypress.Commands.add('documentHidden', (isHidden = false) => {
     cy.document().trigger('visibilitychange');
 });
 
-Cypress.Commands.add(
-    'serverSend',
-    (data: Array<Record<string, any> | string>) => {
-        cy.wrap<Promise<MockWebSocket>, MockWebSocket>(connectPromise, {
-            log: false,
-        }).then(() => {
-            data.forEach((item) => {
-                const message =
-                    typeof item === 'string' ? item : JSON.stringify(item);
-                server.send(message);
-            });
+Cypress.Commands.add('serverSend', (data: Array<ServerMessage | string>) => {
+    cy.wrap<Promise<MockWebSocket>, MockWebSocket>(connectPromise, {
+        log: false,
+    }).then(() => {
+        data.forEach((item) => {
+            const message =
+                typeof item === 'string' ? item : JSON.stringify(item);
+            server.send(message);
         });
-    }
-);
+    });
+});
 
 Cypress.Commands.add('serverStop', () => {
     messages = [];
@@ -113,7 +106,7 @@ Cypress.Commands.add('serverClose', (options?: CloseEventInit) => {
 
 Cypress.Commands.add(
     'waitForMessage',
-    (message: Record<string, any>, shouldExist = true) => {
+    (message: ServerMessage, shouldExist = true) => {
         if (shouldExist) {
             cy.wrap(connectPromise, { log: false })
                 .wrap(messages, { log: false })

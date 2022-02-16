@@ -1,4 +1,6 @@
-export type FeedArgs = Record<string, any>;
+export type FeedData<T = any> = Record<string, T>;
+
+export type FeedArgs = FeedData;
 
 export type FeedStatus =
     | 'connected'
@@ -16,11 +18,6 @@ export type FeedChannelStatus =
     | 'reconnecting'
     | 'created';
 
-export type FeedChannelListener = {
-    onStatusChange: (status: FeedChannelStatus, error?: string) => void;
-    onSendMessage: (endpoint: string, args: FeedArgs) => void;
-};
-
 export type FeedListener = {
     onChannelStatusChange: (
         endpoint: string,
@@ -32,4 +29,4 @@ export type FeedListener = {
     onMessage: (endpoint: string, data: Array<StreamingMessage>) => void;
 };
 
-export type StreamingMessage = Record<string, any>;
+export type StreamingMessage = FeedData;

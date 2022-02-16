@@ -1,10 +1,7 @@
-import { createReducer, isDraft, original } from '@reduxjs/toolkit';
+import { AnyAction, createReducer, isDraft, original } from '@reduxjs/toolkit';
 import { create, update, snapshot, remove } from '@trading/models/feed';
 import { Levels, Product } from './types';
-import { getLogger } from '@trading/utils';
 import { ENDPOINT } from './config';
-
-const log = getLogger('orderBookReducer');
 
 export interface OrderBookSlice {
     [key: string]: Product;
@@ -50,14 +47,13 @@ const mergePrices = (stateLevels: Levels, updatedLevels: Levels) => {
 
 const applyTotals = (levels: Levels): Levels => {
     let sum = 0;
-    const nestLevels: Levels = levels.map((level) => {
+    return levels.map((level) => {
         sum += level[1];
         if (level[2] !== sum) {
             return [level[0], level[1], sum];
         }
         return level;
     });
-    return nestLevels;
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -94,8 +90,8 @@ const reducer = createReducer(initialState, (builder) => {
 
             const nextProductState = state[productId];
             if (!nextProductState) {
-                log.warn('message corrupted', message);
-                return state;
+                // we have received messages for unsubscribed channel, remove when we will get unsubscribe
+                return;
             }
 
             /**
@@ -117,7 +113,7 @@ const reducer = createReducer(initialState, (builder) => {
             messages.forEach((message) => {
                 const nextProductState = state[message.product_id];
                 if (!nextProductState) {
-                    // we have received messages for unsubscribed channel
+                    // we have received messages for unsubscribed channel, remove when we will get unsubscribe
                     return;
                 }
 
@@ -141,23 +137,21 @@ const reducer = createReducer(initialState, (builder) => {
             bidsToUpdate.forEach((nextProductState) => {
                 // Sort descending
                 nextProductState.bids.sort((a, b) => b[0] - a[0]);
-                //nextProductState.bids.splice(nextProductState.numLevels);
                 nextProductState.bids = applyTotals(nextProductState.bids);
             });
 
             asksToUpdate.forEach((nextProductState) => {
                 // Sort ascending
                 nextProductState.asks.sort((a, b) => a[0] - b[0]);
-                //nextProductState.asks.splice(nextProductState.numLevels);
                 nextProductState.asks = applyTotals(nextProductState.asks);
             });
 
             return state;
         })
         .addMatcher(
-            (action: any) => action?.endpoint === ENDPOINT,
+            (action: AnyAction) => action?.endpoint === ENDPOINT,
             (slice, action) => {
-                //do nothing
+                // do nothing
             }
         );
 });

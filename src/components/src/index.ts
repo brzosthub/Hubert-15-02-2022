@@ -21,5 +21,4 @@ export { default as SheetHeader } from './lib/sheet/sheetHeader';
 export { default as SheetFooter } from './lib/sheet/sheetFooter';
 export { default as Stack } from './lib/stack/stack';
 export { default as StackItem } from './lib/stack/stackItem';
-export { default as Stats } from './lib/stats/stats';
 export { default as useResizeObserver } from './lib/useResizeObserver/useResizeObserver';

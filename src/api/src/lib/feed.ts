@@ -6,6 +6,7 @@ import {
     FeedStatus,
     FeedArgs,
     FeedChannelStatus,
+    FeedData,
 } from './types';
 import { getLogger } from '@trading/utils';
 import FeedChannel from './feedChannel';
@@ -30,6 +31,7 @@ class Feed {
     feedChannels: Record<string, FeedChannel> = {};
 
     flushTime = performance.now();
+    isFlushScheduled?: ReturnType<typeof setTimeout>;
 
     perfHistory: Med = new Med(100);
 
@@ -59,7 +61,7 @@ class Feed {
         return new WebSocket(url);
     }
 
-    subscribe(endpoint: string, args: Record<string, any>): boolean {
+    subscribe(endpoint: string, args: FeedArgs): boolean {
         const id = getEndpointHash(endpoint, args);
         let feedChannel: FeedChannel = this.feedChannels[id];
 
@@ -74,7 +76,7 @@ class Feed {
         return true;
     }
 
-    unsubscribe(endpoint: string, args: Record<string, any>) {
+    unsubscribe(endpoint: string, args: FeedArgs) {
         const id = getEndpointHash(endpoint, args);
 
         const feedChannel: FeedChannel = this.feedChannels[id];
@@ -139,74 +141,66 @@ class Feed {
         );
     }
 
-    isFrame?: ReturnType<typeof setTimeout>;
-
     flushReceivedMessages() {
         const now = performance.now();
 
         if (now >= this.flushTime && this.receivedMessagesQueue.length > 0) {
-            const throttle = () => {
-                const start = performance.now();
-                /**
-                 * Group messages by endpoint so that different reducers can match it
-                 */
-                const groupedMessages = this.receivedMessagesQueue.reduce(
-                    (result, current) => {
-                        if (!result[current.feed]) {
-                            result[current.feed] = [];
-                        }
+            const start = performance.now();
+            /**
+             * Group messages by endpoint so that different reducers can match it
+             */
+            const groupedMessages = this.receivedMessagesQueue.reduce(
+                (result, current) => {
+                    if (!result[current.feed]) {
+                        result[current.feed] = [];
+                    }
 
-                        result[current.feed].push(current);
-                        return result;
-                    },
-                    {}
-                );
+                    result[current.feed].push(current);
+                    return result;
+                },
+                {}
+            );
 
-                Object.keys(groupedMessages).forEach((endpoint) => {
-                    this.listener.onMessage(
-                        endpoint,
-                        groupedMessages[endpoint]
-                    );
-                });
+            Object.keys(groupedMessages).forEach((endpoint) => {
+                this.listener.onMessage(endpoint, groupedMessages[endpoint]);
+            });
 
-                // TODO: Feature - improve - we could reduce less messages per call basing on time
-                const delta = performance.now() - start;
-                const avgDelta = this.perfHistory.add(
-                    delta / this.receivedMessagesQueue.length
-                );
+            // TODO: Feature - improve - we could reduce less messages per call basing on time
+            const delta = performance.now() - start;
+            const avgDelta = this.perfHistory.add(
+                delta / this.receivedMessagesQueue.length
+            );
 
-                // Delta could be 0 in theory
-                let nextDelay =
-                    avgDelta * constants.MIN_THROTTLE_TIME +
-                    constants.FRAME_TIME;
+            // Delta could be 0 in theory
+            let nextDelay =
+                avgDelta * constants.MIN_THROTTLE_TIME + constants.FRAME_TIME;
 
-                // Prevent oscillating
-                nextDelay =
-                    Math.floor(nextDelay / constants.MIN_THROTTLE_TIME) *
-                    constants.MIN_THROTTLE_TIME;
+            // Prevent oscillating
+            nextDelay =
+                Math.floor(nextDelay / constants.MIN_THROTTLE_TIME) *
+                constants.MIN_THROTTLE_TIME;
 
-                // Apply min max
-                if (nextDelay < constants.MIN_THROTTLE_TIME) {
-                    nextDelay = constants.MIN_THROTTLE_TIME;
-                }
+            // Apply min max
+            if (nextDelay < constants.MIN_THROTTLE_TIME) {
+                nextDelay = constants.MIN_THROTTLE_TIME;
+            }
 
-                if (nextDelay > constants.MAX_THROTTLE_TIME) {
-                    nextDelay = constants.MAX_THROTTLE_TIME;
-                }
+            if (nextDelay > constants.MAX_THROTTLE_TIME) {
+                nextDelay = constants.MAX_THROTTLE_TIME;
+            }
 
-                log.debug('delay', nextDelay, avgDelta);
+            log.debug('delay', nextDelay, avgDelta);
 
-                this.flushTime = performance.now() + nextDelay;
-                this.receivedMessagesQueue = [];
-            };
-
-            // Leave like that to play around with raf
-            throttle();
+            this.flushTime = performance.now() + nextDelay;
+            this.receivedMessagesQueue = [];
         } else {
-            if (!this.isFrame && this.receivedMessagesQueue.length > 0) {
+            if (
+                !this.isFlushScheduled &&
+                this.receivedMessagesQueue.length > 0
+            ) {
                 //try again
-                this.isFrame = setTimeout(() => {
-                    this.isFrame = undefined;
+                this.isFlushScheduled = setTimeout(() => {
+                    this.isFlushScheduled = undefined;
                     this.flushReceivedMessages();
                 }, this.flushTime - performance.now());
             }
@@ -310,7 +304,7 @@ class Feed {
         this.updateHeartbeat();
 
         const message = evt.data as string;
-        let data: any;
+        let data: FeedData;
         try {
             data = JSON.parse(message);
         } catch (e) {
